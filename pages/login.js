@@ -2,35 +2,50 @@ import React from "react";
 
 const IndexPage = () => {
     return ( 
-    <div className="formlogin">
-        <form >
-        <p>Login</p>
-        <input
-            name="email"
-            type="email"
+        <div className="containerlogin">
+
+            <form className="form">
+            <p>Login</p>
+            <input className= "input"
+                name="email"
+                type="email"   
+            />
+            <br></br>
+            <input className= "input"
+                name="password"
+                type="password"
+            />
+            <br></br>
+            <input type="submit" value="Submit" />
             
-        />
-        <input
-            name="password"
-            type="password"
-        />
-        <input type="submit" value="Submit" />
+            </form>
         
-        </form>
-    </div>
+
+            <style jsx>{`
+            .containerlogin {
+            padding: 5rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            background-color: #E6E6E6; 
+            }
+            .form {
+            margin: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #000;
+            border-radius: 10px; 
+        }
+        .input{
+            padding: 2px;
+            margin: 10px;
+        }
+            `}</style> 
+        </div>
     )
+
 }
-<style jsx>{`
-.formlogin {
-    padding: 5rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    background-color: red; 
-}
-`}</style>
+
 
 export default IndexPage;
