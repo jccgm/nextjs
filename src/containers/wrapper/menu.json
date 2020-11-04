@@ -1,0 +1,38 @@
+{
+  "menu.admin": [
+    {
+      "title": "sidebar.main",
+      "menu": [
+        {
+          "textId": "sidebar.homeAdmin",
+          "url": "admin/",
+          "icon": "icon icon-home",
+          "submenu": []
+        }
+      ]
+    },
+    {
+      "title": "sidebar.admin.setup",
+      "menu": [
+        {
+          "textId": "sidebar.homeAdmin",
+          "url": "admin/",
+          "icon": "icon icon-home",
+          "submenu": []
+        },
+        {
+          "textId": "sidebar.admin.setup.generals",
+          "icon": "icon icon-widgets",
+          "submenu": [
+            {
+              "textId": "sidebar.admin.setup.subsocieties",
+              "url": "admin/[id]/sociedades",
+              "as": "/admin/configuracion/sociedades",
+              "submenu": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

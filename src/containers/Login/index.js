@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react';
 
 import { Form, Input, Button, Checkbox, PageHeader,notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -20,17 +20,57 @@ const  Login = () => {
       },
     });
   };
-
-  const [mostrar, setMostrar] = useState({
+  const initialState = {
     username: ' ',
     password: ' ',
-  });
+  }
+  const reducer = (state, action) => {
+      return { ...state, ...action};
+    
+  }
+  // const [state, setState] = useState(initilize);
  
-  useEffect( () => {
-   console.log(mostrar)
-  });
-  
+  const [state, setState] = useReducer( reducer, initialState);
+  const handleusername = values => {
+    setState({
+      ...state,
+      username: values.target.value
+    } )
+  }
+  const handlePassword = values => {
+    setState({
+      ...state,
+      password: values.target.value
+    } )
+  }
+  const requestInitial = async () => {
+    const request = await fetch('https://jsonplaceholder.typicode.com/users')
+    .then( values => values.json())
+    .then( values => console.log(values));
 
+  }
+
+  const requetPost = async () => {
+    const url = 'https://jsonplaceholder.typicode.com/users'
+    const form = {
+      usename: 'lucas',
+      password: 'bsgdyrtwnhd'
+    }
+    const option = {
+      method: 'POST',
+      body: JSON.stringify(form)
+    }
+    const request = await fetch(url, option)
+    .then( values => values.json())
+    .then( values => values);
+      console.log(request);
+  }
+      console.log(state);
+
+  useEffect( () => {
+     requestInitial();
+     requetPost();
+    });
   return ( 
     <>
          <Form style={{ background: '#D8D8D8', width: '500px', margin: 'auto ', padding: '10px', marginTop: '10px'} }
@@ -47,7 +87,7 @@ const  Login = () => {
                 name="username"
                 rules={[{ required: true, message: 'Please input your Username!' }]}
               >
-                <Input prefix={<UserOutlined />} placeholder="Username o Email" />
+                <Input prefix={<UserOutlined />} placeholder="Username o Email"  onChange={handleusername}/>
               </Form.Item>
               <Form.Item
                 name="password"
@@ -57,17 +97,28 @@ const  Login = () => {
                   prefix={<LockOutlined />}
                   type="password"
                   placeholder="Password"
-                  
+                  onChange={handlePassword }
                 />
               </Form.Item>
               <Form.Item>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
-
-                <a className="login-form-forgot" href="">
-                  Forgot password
-                </a>
+               
+                <Link className="login-form-forgot" href="/recordar-contrasena" >
+                  <a>
+                    Forgot password
+                  </a>
+                </Link>
+                <Form.Item name="remember" valuePropName="terminos" noStyle>
+                <Checkbox style={{marginLeft: '40px'}}>
+                  <Link  href="/terminos-condiciones" >
+                    <a >
+                      Terminos Condiciones
+                    </a>
+                  </Link>
+                </Checkbox>
+                </Form.Item>
               </Form.Item>
 
               <Form.Item  style={{ display: 'flex'} } >
@@ -80,7 +131,6 @@ const  Login = () => {
                     register now
                     </a>
                 </Link>
-                
                 </Button> 
               </Form.Item>
           </Form>
